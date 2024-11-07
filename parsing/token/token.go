@@ -1,8 +1,8 @@
 /*
-  token
-  Defines all tokens that build expressions, statements, etc. in the parser
-  Tokens act as building blocks for bigger building blocks
-  Contains all unique characters and combinations of them used in Clear
+token
+Defines all tokens that build expressions, statements, etc. in the parser
+Tokens act as building blocks for bigger building blocks
+Contains all unique characters and combinations of them used in Clear
 */
 package token
 
@@ -30,11 +30,18 @@ const (
 	INT   = "INT"
 
 	// Operators
-	ASSIGN = "="
-	PLUS   = "+"
-	MINUS  = "-"
-	STAR   = "*"
-	SLASH  = "/"
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	BANG     = "!"
+	ASTERISK = "*"
+	SLASH    = "/"
+
+	// Comparison
+	LT     = "<"
+	GT     = ">"
+	EQ     = "=="
+	NOT_EQ = "!="
 
 	// Delimiters
 	COMMA     = ","
@@ -47,12 +54,22 @@ const (
 	// Keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
 
 // This map defines all keywords in the Clear language and maps them to their respective token
 var keywords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
 }
 
 /*
