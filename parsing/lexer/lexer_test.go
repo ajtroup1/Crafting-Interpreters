@@ -1,9 +1,12 @@
 package lexer
 
 import (
+	"fmt"
+	"log"
 	"testing"
 
 	"github.com/ajtroup1/interpreters/parsing/token"
+	"github.com/ajtroup1/interpreters/util"
 )
 
 func TestNextToken(t *testing.T) {
@@ -114,18 +117,28 @@ func TestNextToken(t *testing.T) {
 	}
 
 	l := New(input)
+	passed := true
+	numPassed := 0
 
 	for i, tt := range tests {
 		tok := l.NextToken()
 
 		if tok.Type != tt.expectedType {
-			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
-				i, tt.expectedType, tok.Type)
+			t.Fatalf(util.RedText(fmt.Sprintf("tests[%d] - tokentype wrong. expected=%q, got=%q",
+				i, tt.expectedType, tok.Type)))
+			passed = false
+		} else if tok.Literal != tt.expectedLiteral {
+			t.Fatalf(util.RedText(fmt.Sprintf("tests[%d] - literal wrong. expected=%q, got=%q",
+				i, tt.expectedLiteral, tok.Literal)))
+			passed = false
+		} else {
+			numPassed++
 		}
+	}
 
-		if tok.Literal != tt.expectedLiteral {
-			t.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q",
-				i, tt.expectedLiteral, tok.Literal)
-		}
+	if passed {
+		log.Println(util.GreenText(fmt.Sprintf("%d / %d LEXING TESTS PASSED", numPassed, len(tests))))
+	} else {
+		log.Println(util.RedText(fmt.Sprintf("%d / %d LEXING TESTS PASSED", numPassed, len(tests))))
 	}
 }
