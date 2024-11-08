@@ -1,1 +1,2 @@
-# Crafting-Interpreters
+# Crafting an Interpreter
+
